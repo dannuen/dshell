@@ -18,7 +18,7 @@ StyledRect {
         text: Fcitx.label
         font.bold: true
         font.pointSize: Appearance.fontSize.small
-        color: Fcitx.vietnamese ? Colors.onTertiaryContainer : Colors.onSurface
+        color: Fcitx.vietnamese ? Colors.fgTertiaryContainer : Colors.fgSurface
     }
 
     StateLayer {

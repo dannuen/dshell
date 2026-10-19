@@ -164,7 +164,7 @@ PopupPanel {
                                     width: parent.width - chips.width - parent.spacing
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: bind.modelData.desc
-                                    color: Colors.onSurfaceVariant
+                                    color: Colors.fgSurfaceVariant
                                     font.pointSize: Appearance.fontSize.small
                                 }
                             }

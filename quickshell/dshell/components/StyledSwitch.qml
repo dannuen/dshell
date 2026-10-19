@@ -31,7 +31,7 @@ Item {
             radius: Appearance.rounding.full
             anchors.verticalCenter: parent.verticalCenter
             x: root.checked ? parent.width - width - 3 : 6
-            color: root.checked ? Colors.onPrimary : Colors.outline
+            color: root.checked ? Colors.fgPrimary : Colors.outline
 
             Behavior on x {
                 NumberAnimation {

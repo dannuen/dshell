@@ -15,7 +15,7 @@ Column {
     StyledText {
         visible: Audio.streams.length === 0
         text: "No apps playing audio"
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         padding: Appearance.spacing.small
     }
 
@@ -39,7 +39,7 @@ Column {
                     width: parent.width
                     text: stream.appName
                     font.pointSize: Appearance.fontSize.small
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                 }
 
                 StyledSlider {
@@ -72,7 +72,7 @@ Column {
 
     StyledText {
         text: "Output device"
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         font.pointSize: Appearance.fontSize.small
     }
 
@@ -102,7 +102,7 @@ Column {
                 MaterialIcon {
                     anchors.verticalCenter: parent.verticalCenter
                     text: sinkRow.current ? "radio_button_checked" : "radio_button_unchecked"
-                    color: sinkRow.current ? Colors.primary : Colors.onSurfaceVariant
+                    color: sinkRow.current ? Colors.primary : Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.normal
                 }
 

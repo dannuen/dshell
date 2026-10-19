@@ -22,14 +22,14 @@ Column {
     StyledText {
         visible: !Bluetooth.enabled
         text: "Bluetooth is off"
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         padding: Appearance.spacing.small
     }
 
     StyledText {
         visible: Bluetooth.enabled && root.sorted.length === 0
         text: "Searching..."
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         padding: Appearance.spacing.small
     }
 
@@ -67,7 +67,7 @@ Column {
                 MaterialIcon {
                     anchors.verticalCenter: parent.verticalCenter
                     text: Bluetooth.deviceIcon(entry.modelData)
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                 }
 
                 StyledText {
@@ -82,7 +82,7 @@ Column {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: entry.modelData.batteryAvailable
                     text: visible ? `${Math.round(entry.modelData.battery * 100)}%` : ""
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.small
                 }
 

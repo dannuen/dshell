@@ -13,8 +13,12 @@ Singleton {
     readonly property bool ready: true
     readonly property bool light: Config.theme.mode === "light"
 
+    // fgX is the text and icon color on top of X (Material's "on X").
+    // Not named onX: next to a property X, QML reads onX as X's change
+    // handler and the color comes out black.
+
     readonly property color background: adapter.background
-    readonly property color onBackground: adapter.on_background
+    readonly property color fgBackground: adapter.on_background
     readonly property color surface: adapter.surface
     readonly property color surfaceDim: adapter.surface_dim
     readonly property color surfaceBright: adapter.surface_bright
@@ -23,25 +27,25 @@ Singleton {
     readonly property color surfaceContainer: adapter.surface_container
     readonly property color surfaceContainerHigh: adapter.surface_container_high
     readonly property color surfaceContainerHighest: adapter.surface_container_highest
-    readonly property color onSurface: adapter.on_surface
-    readonly property color onSurfaceVariant: adapter.on_surface_variant
+    readonly property color fgSurface: adapter.on_surface
+    readonly property color fgSurfaceVariant: adapter.on_surface_variant
     readonly property color surfaceVariant: adapter.surface_variant
     readonly property color primary: adapter.primary
-    readonly property color onPrimary: adapter.on_primary
+    readonly property color fgPrimary: adapter.on_primary
     readonly property color primaryContainer: adapter.primary_container
-    readonly property color onPrimaryContainer: adapter.on_primary_container
+    readonly property color fgPrimaryContainer: adapter.on_primary_container
     readonly property color secondary: adapter.secondary
-    readonly property color onSecondary: adapter.on_secondary
+    readonly property color fgSecondary: adapter.on_secondary
     readonly property color secondaryContainer: adapter.secondary_container
-    readonly property color onSecondaryContainer: adapter.on_secondary_container
+    readonly property color fgSecondaryContainer: adapter.on_secondary_container
     readonly property color tertiary: adapter.tertiary
-    readonly property color onTertiary: adapter.on_tertiary
+    readonly property color fgTertiary: adapter.on_tertiary
     readonly property color tertiaryContainer: adapter.tertiary_container
-    readonly property color onTertiaryContainer: adapter.on_tertiary_container
+    readonly property color fgTertiaryContainer: adapter.on_tertiary_container
     readonly property color error: adapter.error
-    readonly property color onError: adapter.on_error
+    readonly property color fgError: adapter.on_error
     readonly property color errorContainer: adapter.error_container
-    readonly property color onErrorContainer: adapter.on_error_container
+    readonly property color fgErrorContainer: adapter.on_error_container
     readonly property color outline: adapter.outline
     readonly property color outlineVariant: adapter.outline_variant
     readonly property color shadow: adapter.shadow

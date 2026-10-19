@@ -32,7 +32,7 @@ StyledRect {
             visible: !root.player
             width: parent.width
             text: "Nothing playing"
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
             horizontalAlignment: Text.AlignHCenter
             height: 60
         }
@@ -61,7 +61,7 @@ StyledRect {
                     anchors.centerIn: parent
                     visible: Players.artUrl === ""
                     text: "music_note"
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                 }
             }
 
@@ -79,7 +79,7 @@ StyledRect {
                 StyledText {
                     width: parent.width
                     text: Players.artist
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.small
                 }
 
@@ -115,7 +115,7 @@ StyledRect {
 
             StyledText {
                 text: Format.duration(root.player?.position ?? 0)
-                color: Colors.onSurfaceVariant
+                color: Colors.fgSurfaceVariant
                 font.pointSize: Appearance.fontSize.small
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -133,7 +133,7 @@ StyledRect {
 
             StyledText {
                 text: Format.duration(root.player?.length ?? 0)
-                color: Colors.onSurfaceVariant
+                color: Colors.fgSurfaceVariant
                 font.pointSize: Appearance.fontSize.small
                 anchors.verticalCenter: parent.verticalCenter
             }

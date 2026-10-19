@@ -113,11 +113,11 @@ PopupPanel {
                                 anchors.centerIn: parent
                                 text: item.modelData.icon
                                 font.pointSize: Appearance.fontSize.iconLarge + 10
-                                color: item.selected ? Colors.onPrimary : Colors.onSurface
+                                color: item.selected ? Colors.fgPrimary : Colors.fgSurface
                             }
 
                             StateLayer {
-                                color: item.selected ? Colors.onPrimary : Colors.onSurface
+                                color: item.selected ? Colors.fgPrimary : Colors.fgSurface
                                 onContainsMouseChanged: if (containsMouse)
                                     frame.selected = item.index
                                 onClicked: frame.activate(item.index)
@@ -127,7 +127,7 @@ PopupPanel {
                         StyledText {
                             text: item.modelData.label
                             anchors.horizontalCenter: parent.horizontalCenter
-                            color: item.selected ? Colors.primary : Colors.onSurfaceVariant
+                            color: item.selected ? Colors.primary : Colors.fgSurfaceVariant
                         }
                     }
                 }

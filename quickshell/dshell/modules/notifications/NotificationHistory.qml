@@ -44,7 +44,7 @@ PopupPanel {
                     MaterialIcon {
                         text: "do_not_disturb_on"
                         anchors.verticalCenter: parent.verticalCenter
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                     }
 
                     StyledSwitch {
@@ -71,7 +71,7 @@ PopupPanel {
                 height: 80
                 text: "No notifications"
                 horizontalAlignment: Text.AlignHCenter
-                color: Colors.onSurfaceVariant
+                color: Colors.fgSurfaceVariant
             }
 
             ListView {

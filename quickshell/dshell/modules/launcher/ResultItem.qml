@@ -45,7 +45,7 @@ StyledRect {
                 visible: root.emoji === "" && root.icon === "" && root.symbol !== ""
                 text: root.symbol
                 font.pointSize: Appearance.fontSize.iconLarge
-                color: root.selected ? Colors.onPrimaryContainer : Colors.onSurfaceVariant
+                color: root.selected ? Colors.fgPrimaryContainer : Colors.fgSurfaceVariant
             }
 
             StyledText {
@@ -64,7 +64,7 @@ StyledRect {
             StyledText {
                 width: parent.width
                 text: root.title
-                color: root.selected ? Colors.onPrimaryContainer : Colors.onSurface
+                color: root.selected ? Colors.fgPrimaryContainer : Colors.fgSurface
                 font.pointSize: Appearance.fontSize.normal
             }
 
@@ -72,7 +72,7 @@ StyledRect {
                 width: parent.width
                 visible: root.subtitle !== ""
                 text: root.subtitle
-                color: root.selected ? Colors.onPrimaryContainer : Colors.onSurfaceVariant
+                color: root.selected ? Colors.fgPrimaryContainer : Colors.fgSurfaceVariant
                 font.pointSize: Appearance.fontSize.small
                 opacity: 0.8
             }
@@ -80,7 +80,7 @@ StyledRect {
     }
 
     StateLayer {
-        color: root.selected ? Colors.onPrimaryContainer : Colors.onSurface
+        color: root.selected ? Colors.fgPrimaryContainer : Colors.fgSurface
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
         onClicked: mouse => {
             if (mouse.button === Qt.MiddleButton)

@@ -11,7 +11,7 @@ StyledRect {
     property bool primary: false
     property bool active: false
     property bool disabled: false
-    property color textColor: primary ? Colors.onPrimary : (active ? Colors.onPrimaryContainer : Colors.onSurface)
+    property color textColor: primary ? Colors.fgPrimary : (active ? Colors.fgPrimaryContainer : Colors.fgSurface)
 
     signal clicked
 

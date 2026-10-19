@@ -96,7 +96,7 @@ PopupPanel {
                             anchors.margins: 4
                             text: box.wsId
                             font.pointSize: Appearance.fontSize.small
-                            color: box.active ? Colors.primary : Colors.onSurfaceVariant
+                            color: box.active ? Colors.primary : Colors.fgSurfaceVariant
                             z: 2
                         }
 
@@ -145,7 +145,7 @@ PopupPanel {
                                         text: win.modelData.title
                                         font.pointSize: Appearance.fontSize.small - 1
                                         horizontalAlignment: Text.AlignHCenter
-                                        color: win.modelData.activated ? Colors.onPrimaryContainer : Colors.onSurfaceVariant
+                                        color: win.modelData.activated ? Colors.fgPrimaryContainer : Colors.fgSurfaceVariant
                                     }
                                 }
 

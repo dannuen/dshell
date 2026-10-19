@@ -20,13 +20,13 @@ StyledRect {
         StyledText {
             text: Time.format(Config.bar.clockFormat)
             font.bold: true
-            color: Visibilities.dashboard ? Colors.onPrimaryContainer : Colors.onSurface
+            color: Visibilities.dashboard ? Colors.fgPrimaryContainer : Colors.fgSurface
             anchors.verticalCenter: parent.verticalCenter
         }
 
         StyledText {
             text: Time.format(Config.bar.dateFormat)
-            color: Visibilities.dashboard ? Colors.onPrimaryContainer : Colors.onSurfaceVariant
+            color: Visibilities.dashboard ? Colors.fgPrimaryContainer : Colors.fgSurfaceVariant
             anchors.verticalCenter: parent.verticalCenter
         }
     }

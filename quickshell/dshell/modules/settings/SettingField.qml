@@ -16,7 +16,7 @@ Row {
     readonly property var value: Config[section][field.key]
 
     width: parent.width
-    height: Math.max(40, editor.height)
+    height: Math.max(44, editor.height)
     spacing: Appearance.spacing.normal
 
     function apply(v: var): void {
@@ -39,8 +39,10 @@ Row {
         width: {
             if (root.field.type === "bool")
                 return 48;
+            // fixed width: the chips are right aligned inside it, so a
+            // narrower box would push short choice lists off the panel
             if (root.field.type === "choice")
-                return choiceRow.implicitWidth;
+                return 320;
             if (root.field.type === "string")
                 return 260;
             return numRow.implicitWidth;
@@ -89,7 +91,7 @@ Row {
 
             IconButton {
                 icon: "remove"
-                iconSize: Appearance.fontSize.normal
+                iconSize: Appearance.fontSize.large
                 anchors.verticalCenter: parent.verticalCenter
                 onClicked: numRow.bump(-1)
             }
@@ -105,7 +107,7 @@ Row {
                     anchors.fill: parent
                     horizontalAlignment: TextInput.AlignHCenter
                     verticalAlignment: TextInput.AlignVCenter
-                    color: Colors.onSurface
+                    color: Colors.fgSurface
                     font.family: Appearance.font
                     font.pointSize: Appearance.fontSize.normal
                     text: numRow.visible ? String(root.value ?? "") : ""
@@ -120,7 +122,7 @@ Row {
 
             IconButton {
                 icon: "add"
-                iconSize: Appearance.fontSize.normal
+                iconSize: Appearance.fontSize.large
                 anchors.verticalCenter: parent.verticalCenter
                 onClicked: numRow.bump(1)
             }
@@ -129,7 +131,7 @@ Row {
         Flow {
             id: choiceRow
             visible: root.field.type === "choice"
-            width: 320
+            width: parent.width
             spacing: Appearance.spacing.tiny
             layoutDirection: Qt.RightToLeft
 

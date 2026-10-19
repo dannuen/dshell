@@ -41,7 +41,7 @@ StyledRect {
                 StyledText {
                     width: parent.width
                     text: Weather.loaded ? `${Weather.description}, feels like ${Weather.feelsLike}` : "Loading weather"
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.small
                 }
 
@@ -49,7 +49,7 @@ StyledRect {
                     width: parent.width
                     visible: Weather.loaded
                     text: `${Weather.city}  ·  humidity ${Weather.humidity}  ·  wind ${Weather.wind}`
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.small
                 }
             }
@@ -77,14 +77,14 @@ StyledRect {
                     StyledText {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: Qt.formatDate(new Date(modelData.date), "ddd")
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                         font.pointSize: Appearance.fontSize.small
                     }
 
                     MaterialIcon {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: modelData.icon
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                     }
 
                     StyledText {

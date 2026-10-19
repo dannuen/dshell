@@ -12,7 +12,7 @@ StyledRect {
     radius: Appearance.rounding.full
     color: Visibilities.sidebar ? Colors.primaryContainer : "transparent"
 
-    readonly property color fg: Visibilities.sidebar ? Colors.onPrimaryContainer : Colors.onSurface
+    readonly property color fg: Visibilities.sidebar ? Colors.fgPrimaryContainer : Colors.fgSurface
 
     Row {
         id: row

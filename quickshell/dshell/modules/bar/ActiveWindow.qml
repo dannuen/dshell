@@ -37,7 +37,7 @@ Item {
         StyledText {
             text: root.entry?.name ? `${root.entry.name}  ·  ${root.title}` : root.title
             width: Math.min(implicitWidth, root.maxWidth - 26)
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
             anchors.verticalCenter: parent.verticalCenter
         }
     }

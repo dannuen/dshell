@@ -213,14 +213,14 @@ PopupPanel {
                         MaterialIcon {
                             text: navItem.modelData.icon
                             anchors.verticalCenter: parent.verticalCenter
-                            color: navItem.selected ? Colors.onSecondaryContainer : Colors.onSurfaceVariant
+                            color: navItem.selected ? Colors.fgSecondaryContainer : Colors.fgSurfaceVariant
                             font.pointSize: Appearance.fontSize.normal + 2
                         }
 
                         StyledText {
                             text: navItem.modelData.title
                             anchors.verticalCenter: parent.verticalCenter
-                            color: navItem.selected ? Colors.onSecondaryContainer : Colors.onSurface
+                            color: navItem.selected ? Colors.fgSecondaryContainer : Colors.fgSurface
                             font.weight: navItem.selected ? Font.DemiBold : Font.Normal
                         }
                     }
@@ -242,6 +242,7 @@ PopupPanel {
             }
 
             Flickable {
+                id: flick
                 anchors.top: title.bottom
                 anchors.topMargin: Appearance.spacing.normal
                 anchors.bottom: footer.top
@@ -253,8 +254,9 @@ PopupPanel {
 
                 Column {
                     id: fields
-                    width: parent.width
-                    spacing: Appearance.spacing.small
+                    // room on the right for the scroll indicator
+                    width: parent.width - Appearance.spacing.normal
+                    spacing: Appearance.spacing.normal
 
                     Repeater {
                         model: frame.section.fields
@@ -267,6 +269,17 @@ PopupPanel {
                         }
                     }
                 }
+            }
+
+            // Scroll indicator, only when the section is taller than the view
+            Rectangle {
+                visible: flick.contentHeight > flick.height
+                x: parent.width - width
+                y: flick.y + flick.visibleArea.yPosition * flick.height
+                width: 4
+                height: flick.visibleArea.heightRatio * flick.height
+                radius: width / 2
+                color: Colors.alpha(Colors.fgSurfaceVariant, 0.5)
             }
 
             Row {

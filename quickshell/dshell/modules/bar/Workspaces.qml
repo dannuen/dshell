@@ -61,7 +61,7 @@ Item {
                     width: active ? 32 : 22
                     height: pill.implicitHeight - Appearance.spacing.small
                     radius: Appearance.rounding.full
-                    color: active ? Colors.primary : (mouse.containsMouse ? Colors.alpha(Colors.onSurface, 0.1) : "transparent")
+                    color: active ? Colors.primary : (mouse.containsMouse ? Colors.alpha(Colors.fgSurface, 0.1) : "transparent")
                     anchors.verticalCenter: parent.verticalCenter
 
                     Behavior on width {
@@ -77,7 +77,7 @@ Item {
                         text: wsItem.modelData
                         font.pointSize: Appearance.fontSize.small
                         font.bold: wsItem.active
-                        color: wsItem.active ? Colors.onPrimary : (wsItem.busy ? Colors.onSurface : Colors.onSurfaceVariant)
+                        color: wsItem.active ? Colors.fgPrimary : (wsItem.busy ? Colors.fgSurface : Colors.fgSurfaceVariant)
                     }
 
                     Rectangle {
@@ -86,7 +86,7 @@ Item {
                         width: wsItem.active ? 10 : 6
                         height: width
                         radius: Appearance.rounding.full
-                        color: wsItem.active ? Colors.onPrimary : (wsItem.busy ? Colors.onSurface : Colors.outline)
+                        color: wsItem.active ? Colors.fgPrimary : (wsItem.busy ? Colors.fgSurface : Colors.outline)
                     }
 
                     MouseArea {

@@ -100,7 +100,7 @@ Column {
                 height: 28
                 text: modelData
                 horizontalAlignment: Text.AlignHCenter
-                color: Colors.onSurfaceVariant
+                color: Colors.fgSurfaceVariant
                 font.pointSize: Appearance.fontSize.small
             }
         }
@@ -125,7 +125,7 @@ Column {
                 StyledText {
                     anchors.centerIn: parent
                     text: cell.modelData.day
-                    color: cell.modelData.today ? Colors.onPrimary : (cell.modelData.current ? Colors.onSurface : Colors.outline)
+                    color: cell.modelData.today ? Colors.fgPrimary : (cell.modelData.current ? Colors.fgSurface : Colors.outline)
                     font.weight: cell.modelData.today ? Font.Bold : Font.Normal
                 }
             }
