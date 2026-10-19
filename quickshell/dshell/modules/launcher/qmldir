@@ -1,0 +1,4 @@
+singleton Emojis 1.0 Emojis.qml
+Launcher 1.0 Launcher.qml
+LauncherContent 1.0 LauncherContent.qml
+ResultItem 1.0 ResultItem.qml

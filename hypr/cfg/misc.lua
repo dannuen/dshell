@@ -1,0 +1,11 @@
+-- Small things.
+
+hl.config({
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
+        force_default_wallpaper = 0,
+        focus_on_activate = true,
+        vfr = true,
+    },
+})
