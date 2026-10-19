@@ -8,7 +8,23 @@ Singleton {
     id: root
 
     readonly property string font: Config.appearance.font
-    readonly property string iconFont: Config.appearance.iconFont
+    // Fall back to any installed Material Symbols variant so icons never
+    // render as plain text when the configured family is missing.
+    readonly property string iconFont: {
+        const want = Config.appearance.iconFont;
+        const have = Qt.fontFamilies();
+        if (have.indexOf(want) >= 0)
+            return want;
+        const alts = ["Material Symbols Rounded", "Material Symbols Outlined", "Material Symbols Sharp"];
+        for (const f of alts) {
+            if (have.indexOf(f) >= 0) {
+                console.warn(`dshell: icon font "${want}" not installed, using "${f}"`);
+                return f;
+            }
+        }
+        console.warn(`dshell: icon font "${want}" not installed. Run scripts/fonts.sh`);
+        return want;
+    }
     readonly property string monoFont: Config.appearance.font
 
     readonly property QtObject fontSize: QtObject {

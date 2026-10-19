@@ -6,6 +6,5 @@ hl.config({
         disable_splash_rendering = true,
         force_default_wallpaper = 0,
         focus_on_activate = true,
-        vfr = true,
     },
 })
