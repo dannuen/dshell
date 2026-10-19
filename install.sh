@@ -226,6 +226,8 @@ if (( ! DRY )) && [[ ! -f "$CONFIG/kitty/colors.conf" ]]; then
     touch "$CONFIG/kitty/colors.conf" 2>/dev/null || true
 fi
 run chmod +x "$REPO"/scripts/*.sh
+# fcitx5 input methods: lotus or bamboo, whichever got installed above
+run bash "$REPO/scripts/fcitx5-profile.sh" --force
 ok "configs in place"
 
 # ---------------------------------------------------------------- 8. services

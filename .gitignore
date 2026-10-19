@@ -4,5 +4,6 @@ hypr/scripts
 # written by matugen from the wallpaper (scripts/wallpaper.sh)
 hypr/colors.lua
 dotfiles/kitty/colors.conf
-# cache fcitx5 writes itself
+# fcitx5 writes these itself (the profile comes from scripts/fcitx5-profile.sh)
 dotfiles/fcitx5/conf/cached_layouts
+dotfiles/fcitx5/profile

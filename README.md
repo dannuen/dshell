@@ -126,4 +126,7 @@ This pulls the repo, runs new scripts from `migrations/` and reloads the shell.
   Font, then refreshes the font cache. Restart the shell with Super+Shift+R.
 - Colors did not change: `matugen` must be installed, and
   `~/.config/dshell/matugen.toml` must exist (install.sh copies it).
+- No Vietnamese typing (bar stays on EN): install `fcitx5-lotus` or
+  `fcitx5-bamboo` from the AUR, then run
+  `bash scripts/fcitx5-profile.sh --force`.
 - Lint everything: `bash scripts/check.sh`.
