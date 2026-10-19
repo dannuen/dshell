@@ -1,0 +1,26 @@
+# dshell matugen config. Installed to ~/.config/dshell/matugen.toml.
+# Templates live in ~/.config/dshell/templates/.
+
+[config]
+
+[templates.dshell]
+input_path = "~/.config/dshell/templates/colors.json"
+output_path = "~/.local/state/dshell/colors.json"
+
+[templates.hyprland]
+input_path = "~/.config/dshell/templates/hyprland-colors.lua"
+output_path = "~/.config/hypr/colors.lua"
+post_hook = "hyprctl reload >/dev/null 2>&1 || true"
+
+[templates.kitty]
+input_path = "~/.config/dshell/templates/kitty-colors.conf"
+output_path = "~/.config/kitty/colors.conf"
+post_hook = "kill -SIGUSR1 $(pidof kitty) 2>/dev/null || true"
+
+[templates.gtk3]
+input_path = "~/.config/dshell/templates/gtk.css"
+output_path = "~/.config/gtk-3.0/gtk.css"
+
+[templates.gtk4]
+input_path = "~/.config/dshell/templates/gtk.css"
+output_path = "~/.config/gtk-4.0/gtk.css"

@@ -1,0 +1,70 @@
+# pacman packages for dshell (CachyOS / Arch). One per line.
+# Hyprland and friends
+hyprland
+hypridle
+hyprpolkitagent
+hyprsunset
+hyprpicker
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+polkit
+# Qt for Quickshell
+qt6-base
+qt6-declarative
+qt6-svg
+qt6-imageformats
+qt6-shadertools
+qt6-wayland
+qt6-5compat
+# audio, network, power
+pipewire
+wireplumber
+pavucontrol
+networkmanager
+bluez
+bluez-utils
+brightnessctl
+ddcutil
+power-profiles-daemon
+upower
+lm_sensors
+# shell helpers
+libqalculate
+cliphist
+wl-clipboard
+grim
+slurp
+swappy
+swww
+playerctl
+cava
+jq
+bc
+curl
+# apps
+kitty
+nautilus
+fish
+# fonts and theme
+ttf-cascadia-code-nerd
+ttf-jetbrains-mono-nerd
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+adw-gtk-theme
+papirus-icon-theme
+# Vietnamese typing
+fcitx5
+fcitx5-configtool
+fcitx5-gtk
+fcitx5-qt
+# terminal tools
+starship
+zoxide
+mise
+fzf
+fd
+eza
+fastfetch
+yt-dlp
+ffmpeg
