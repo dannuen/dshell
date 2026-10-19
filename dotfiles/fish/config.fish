@@ -48,3 +48,4 @@ if status is-login
     set -Ux QT_IM_MODULE fcitx
     set -Ux QT_IM_MODULES "wayland;fcitx"
 end
+export PATH="$HOME/.local/bin:$PATH"
