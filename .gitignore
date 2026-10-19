@@ -1,3 +1,8 @@
 *.bak
 *.orig
 hypr/scripts
+# written by matugen from the wallpaper (scripts/wallpaper.sh)
+hypr/colors.lua
+dotfiles/kitty/colors.conf
+# cache fcitx5 writes itself
+dotfiles/fcitx5/conf/cached_layouts
