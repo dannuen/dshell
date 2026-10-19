@@ -24,9 +24,9 @@ PopupPanel {
             // Size of the focused monitor in logical pixels, used for scaling
             readonly property real monW: Math.max(1, (Hypr.focusedMonitor?.width ?? 1920) / (Hypr.focusedMonitor?.scale ?? 1))
             readonly property real monH: Math.max(1, (Hypr.focusedMonitor?.height ?? 1080) / (Hypr.focusedMonitor?.scale ?? 1))
-            readonly property real scale: 0.14
-            readonly property int boxW: monW * scale
-            readonly property int boxH: monH * scale
+            readonly property real zoom: 0.14
+            readonly property int boxW: monW * zoom
+            readonly property int boxH: monH * zoom
 
             // The window being dragged and which box the pointer is over
             property var dragWindow: null
@@ -116,10 +116,10 @@ PopupPanel {
                                 readonly property bool dragging: frame.dragWindow === modelData
                                 readonly property string cls: ipc.class ?? ""
 
-                                x: lx * frame.scale
-                                y: ly * frame.scale
-                                width: Math.max(16, ipc.size[0] * frame.scale)
-                                height: Math.max(12, ipc.size[1] * frame.scale)
+                                x: lx * frame.zoom
+                                y: ly * frame.zoom
+                                width: Math.max(16, ipc.size[0] * frame.zoom)
+                                height: Math.max(12, ipc.size[1] * frame.zoom)
                                 radius: Appearance.rounding.small / 2
                                 color: modelData.activated ? Colors.primaryContainer : Colors.surfaceContainerHigh
                                 border.width: 1
@@ -180,8 +180,8 @@ PopupPanel {
                                         frame.dropTarget = -1;
                                         if (wasDrag) {
                                             // snap back; Hyprland sends the new state
-                                            win.x = Qt.binding(() => win.lx * frame.scale);
-                                            win.y = Qt.binding(() => win.ly * frame.scale);
+                                            win.x = Qt.binding(() => win.lx * frame.zoom);
+                                            win.y = Qt.binding(() => win.ly * frame.zoom);
                                             if (target > 0 && target !== box.wsId)
                                                 Hypr.moveToWorkspace(win.modelData.address, target);
                                             return;
