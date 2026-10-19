@@ -235,6 +235,14 @@ for s in NetworkManager bluetooth power-profiles-daemon; do
 done
 run systemctl --user enable --now hyprpolkitagent >/dev/null 2>&1 || warn "could not enable hyprpolkitagent (fine if not logged into Hyprland yet)"
 
+# ---------------------------------------------------------------- 8b. fonts
+info "Checking fonts"
+if (( DRY )); then
+    printf '   [dry] %s/scripts/fonts.sh\n' "$REPO"
+else
+    bash "$REPO/scripts/fonts.sh" || warn "icon font missing. Run: bash $REPO/scripts/fonts.sh"
+fi
+
 # ---------------------------------------------------------------- 9. GTK
 if command -v gsettings >/dev/null 2>&1; then
     info "Setting GTK dark theme"
@@ -266,5 +274,6 @@ cat <<MSG
 
    Put wallpapers in ~/Pictures/Wallpapers.
    Shell errors: run 'qs -c dshell' in a terminal.
+   Icons show as text: bash $REPO/scripts/fonts.sh
    Fish as default shell: chsh -s /usr/bin/fish
 MSG

@@ -121,8 +121,9 @@ This pulls the repo, runs new scripts from `migrations/` and reloads the shell.
   prints QML errors.
 - Hyprland config error: `hyprctl reload` prints it. Check `hyprctl version`
   is 0.55 or newer.
-- Missing icons: install `ttf-material-symbols-variable-git` and
-  `ttf-cascadia-code-nerd`, then restart the shell with Super+Shift+R.
+- Icons show as text: run `bash scripts/fonts.sh`. It installs the
+  Material Symbols Rounded font (download, no AUR needed) and the Nerd
+  Font, then refreshes the font cache. Restart the shell with Super+Shift+R.
 - Colors did not change: `matugen` must be installed, and
   `~/.config/dshell/matugen.toml` must exist (install.sh copies it).
 - Lint everything: `bash scripts/check.sh`.
