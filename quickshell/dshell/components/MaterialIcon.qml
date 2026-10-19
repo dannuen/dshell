@@ -7,7 +7,7 @@ Text {
     property bool fill: false
     property int grade: 0
 
-    color: Colors.onSurface
+    color: Colors.fgSurface
     font.family: Appearance.iconFont
     font.pointSize: Appearance.fontSize.icon
     font.variableAxes: ({

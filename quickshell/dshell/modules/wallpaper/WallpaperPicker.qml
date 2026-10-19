@@ -115,7 +115,7 @@ PopupPanel {
                 StyledText {
                     visible: Wallpapers.list.length === 0
                     text: `No images found in ${Config.wallpaper.dir}`
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                 }
             }
         }

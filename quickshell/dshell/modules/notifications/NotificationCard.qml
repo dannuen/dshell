@@ -75,7 +75,7 @@ PanelFrame {
 
                     StyledText {
                         text: root.notif.appName
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                         font.pointSize: Appearance.fontSize.small
                         width: Math.min(implicitWidth, parent.width - timeText.width - parent.spacing)
                     }
@@ -100,7 +100,7 @@ PanelFrame {
                     width: parent.width
                     visible: root.notif.body !== ""
                     text: root.notif.body
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.family: Appearance.font
                     font.pointSize: Appearance.fontSize.normal
                     textFormat: Text.StyledText

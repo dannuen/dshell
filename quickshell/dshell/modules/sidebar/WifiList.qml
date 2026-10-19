@@ -25,14 +25,14 @@ Column {
     StyledText {
         visible: !Network.wifiEnabled
         text: "Wi-Fi is off"
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         padding: Appearance.spacing.small
     }
 
     StyledText {
         visible: Network.wifiEnabled && root.sorted.length === 0
         text: "Searching..."
-        color: Colors.onSurfaceVariant
+        color: Colors.fgSurfaceVariant
         padding: Appearance.spacing.small
     }
 
@@ -73,7 +73,7 @@ Column {
                     MaterialIcon {
                         anchors.verticalCenter: parent.verticalCenter
                         text: Network.strengthIcon(entry.modelData.signalStrength)
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                     }
 
                     StyledText {
@@ -86,7 +86,7 @@ Column {
                     MaterialIcon {
                         anchors.verticalCenter: parent.verticalCenter
                         text: entry.modelData.connected ? "check" : (entry.modelData.security !== WifiSecurityType.Open ? "lock" : "")
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                         font.pointSize: Appearance.fontSize.normal
                     }
                 }

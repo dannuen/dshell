@@ -82,14 +82,14 @@ Scope {
                         text: Time.format(Config.lock.clockFormat)
                         font.pointSize: Appearance.fontSize.huge
                         font.weight: Font.Medium
-                        color: Colors.onBackground
+                        color: Colors.fgBackground
                     }
 
                     StyledText {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: Time.format(Config.lock.dateFormat)
                         font.pointSize: Appearance.fontSize.large
-                        color: Colors.onSurfaceVariant
+                        color: Colors.fgSurfaceVariant
                     }
 
                     Item {
@@ -141,7 +141,7 @@ Scope {
                                 width: parent.width
                                 visible: root.status !== ""
                                 text: root.status
-                                color: root.failed ? Colors.error : Colors.onSurfaceVariant
+                                color: root.failed ? Colors.error : Colors.fgSurfaceVariant
                                 horizontalAlignment: Text.AlignHCenter
                                 font.pointSize: Appearance.fontSize.small
                             }
@@ -155,13 +155,13 @@ Scope {
 
                         MaterialIcon {
                             text: Battery.icon
-                            color: Colors.onSurfaceVariant
+                            color: Colors.fgSurfaceVariant
                             anchors.verticalCenter: parent.verticalCenter
                         }
 
                         StyledText {
                             text: `${Math.round(Battery.percentage * 100)}%`
-                            color: Colors.onSurfaceVariant
+                            color: Colors.fgSurfaceVariant
                             anchors.verticalCenter: parent.verticalCenter
                         }
                     }

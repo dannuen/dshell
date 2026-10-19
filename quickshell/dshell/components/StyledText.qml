@@ -3,7 +3,7 @@ import qs.config
 import qs.services
 
 Text {
-    color: Colors.onSurface
+    color: Colors.fgSurface
     font.family: Appearance.font
     font.pointSize: Appearance.fontSize.normal
     renderType: Text.NativeRendering

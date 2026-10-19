@@ -36,7 +36,7 @@ StyledRect {
             visible: root.icon !== ""
             text: root.icon
             anchors.verticalCenter: parent.verticalCenter
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
         }
 
         Item {
@@ -47,11 +47,11 @@ StyledRect {
                 id: input
                 anchors.fill: parent
                 verticalAlignment: TextInput.AlignVCenter
-                color: Colors.onSurface
+                color: Colors.fgSurface
                 font.family: Appearance.font
                 font.pointSize: Appearance.fontSize.large
                 selectionColor: Colors.primary
-                selectedTextColor: Colors.onPrimary
+                selectedTextColor: Colors.fgPrimary
                 clip: true
                 echoMode: root.password ? TextInput.Password : TextInput.Normal
                 inputMethodHints: root.password ? Qt.ImhHiddenText | Qt.ImhNoPredictiveText : Qt.ImhNone
@@ -67,7 +67,7 @@ StyledRect {
                 id: placeholderItem
                 anchors.fill: parent
                 visible: input.text.length === 0
-                color: Colors.onSurfaceVariant
+                color: Colors.fgSurfaceVariant
                 font.pointSize: Appearance.fontSize.large
             }
         }

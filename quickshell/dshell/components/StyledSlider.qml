@@ -26,7 +26,7 @@ Item {
             visible: root.icon !== ""
             text: root.icon
             anchors.verticalCenter: parent.verticalCenter
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
         }
 
         Item {
@@ -79,7 +79,7 @@ Item {
             visible: root.showPercent
             text: `${Math.round(root.value * 100)}%`
             anchors.verticalCenter: parent.verticalCenter
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
             font.pointSize: Appearance.fontSize.small
             width: 36
             horizontalAlignment: Text.AlignRight

@@ -50,7 +50,7 @@ PopupPanel {
 
                         MaterialIcon {
                             text: Battery.icon
-                            color: Battery.low ? Colors.error : Colors.onSurface
+                            color: Battery.low ? Colors.error : Colors.fgSurface
                             anchors.verticalCenter: parent.verticalCenter
                         }
 
@@ -65,7 +65,7 @@ PopupPanel {
                             StyledText {
                                 visible: Battery.timeText !== ""
                                 text: Battery.timeText
-                                color: Colors.onSurfaceVariant
+                                color: Colors.fgSurfaceVariant
                                 font.pointSize: Appearance.fontSize.small
                             }
                         }
@@ -257,7 +257,7 @@ PopupPanel {
                         MaterialIcon {
                             text: "tune"
                             anchors.verticalCenter: parent.verticalCenter
-                            color: Colors.onSurfaceVariant
+                            color: Colors.fgSurfaceVariant
                         }
 
                         StyledText {
@@ -269,7 +269,7 @@ PopupPanel {
                         MaterialIcon {
                             text: frame.expanded === "mixer" ? "expand_less" : "expand_more"
                             anchors.verticalCenter: parent.verticalCenter
-                            color: Colors.onSurfaceVariant
+                            color: Colors.fgSurfaceVariant
                         }
                     }
                 }

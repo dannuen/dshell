@@ -187,7 +187,7 @@ Variants {
                     width: 42
                     horizontalAlignment: Text.AlignRight
                     anchors.verticalCenter: parent.verticalCenter
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                 }
             }
         }

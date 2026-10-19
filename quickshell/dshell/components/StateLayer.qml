@@ -6,7 +6,7 @@ import qs.services
 MouseArea {
     id: root
 
-    property color color: Colors.onSurface
+    property color color: Colors.fgSurface
     property bool disabled: false
     property real radius: parent?.radius ?? 0
 

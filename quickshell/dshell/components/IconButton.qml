@@ -9,7 +9,7 @@ StyledRect {
     property alias icon: iconItem.text
     property alias fill: iconItem.fill
     property alias iconSize: iconItem.font.pointSize
-    property color iconColor: Colors.onSurface
+    property color iconColor: Colors.fgSurface
     property bool active: false
     property bool disabled: false
     property string tooltip: ""
@@ -28,13 +28,13 @@ StyledRect {
     MaterialIcon {
         id: iconItem
         anchors.centerIn: parent
-        color: root.active ? Colors.onPrimaryContainer : root.iconColor
+        color: root.active ? Colors.fgPrimaryContainer : root.iconColor
     }
 
     StateLayer {
         id: stateLayer
         disabled: root.disabled
-        color: root.active ? Colors.onPrimaryContainer : Colors.onSurface
+        color: root.active ? Colors.fgPrimaryContainer : Colors.fgSurface
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         onClicked: mouse => {
             if (mouse.button === Qt.RightButton)

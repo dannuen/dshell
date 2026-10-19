@@ -11,7 +11,7 @@ StyledRect {
     radius: Appearance.rounding.full
     color: Battery.critical ? Colors.errorContainer : (Battery.low ? Colors.tertiaryContainer : "transparent")
 
-    readonly property color fg: Battery.critical ? Colors.onErrorContainer : (Battery.low ? Colors.onTertiaryContainer : (Battery.charging ? Colors.primary : Colors.onSurface))
+    readonly property color fg: Battery.critical ? Colors.fgErrorContainer : (Battery.low ? Colors.fgTertiaryContainer : (Battery.charging ? Colors.primary : Colors.fgSurface))
 
     Row {
         id: row

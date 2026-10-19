@@ -281,7 +281,7 @@ PanelFrame {
             visible: root.results.length === 0 && root.term !== ""
             width: parent.width
             text: "No results"
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
             horizontalAlignment: Text.AlignHCenter
             height: 40
         }

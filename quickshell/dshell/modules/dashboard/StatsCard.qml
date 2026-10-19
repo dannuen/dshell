@@ -77,7 +77,7 @@ StyledRect {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             text: gauge.sub
-            color: Colors.onSurfaceVariant
+            color: Colors.fgSurfaceVariant
             font.pointSize: Appearance.fontSize.small - 1
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
@@ -127,7 +127,7 @@ StyledRect {
                 spacing: 4
                 MaterialIcon {
                     text: "download"
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.normal
                 }
                 StyledText {
@@ -140,7 +140,7 @@ StyledRect {
                 spacing: 4
                 MaterialIcon {
                     text: "upload"
-                    color: Colors.onSurfaceVariant
+                    color: Colors.fgSurfaceVariant
                     font.pointSize: Appearance.fontSize.normal
                 }
                 StyledText {

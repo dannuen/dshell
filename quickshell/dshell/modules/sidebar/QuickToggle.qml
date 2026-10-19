@@ -21,8 +21,8 @@ StyledRect {
     radius: Appearance.rounding.normal
     color: active ? Colors.primaryContainer : Colors.surfaceContainerHigh
 
-    readonly property color fg: active ? Colors.onPrimaryContainer : Colors.onSurface
-    readonly property color fgDim: active ? Colors.onPrimaryContainer : Colors.onSurfaceVariant
+    readonly property color fg: active ? Colors.fgPrimaryContainer : Colors.fgSurface
+    readonly property color fgDim: active ? Colors.fgPrimaryContainer : Colors.fgSurfaceVariant
 
     StateLayer {
         color: root.fg

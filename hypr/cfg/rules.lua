@@ -101,6 +101,5 @@ hl.window_rule({ match = { class = "steam", title = "Steam" }, center = true, si
 hl.window_rule({ match = { class = "steam.*" }, opaque = true })
 hl.window_rule({ match = { class = "steam", title = "Friends List" }, size = { 460, 800 } })
 
--- dshell layers get blur
-hl.layer_rule({ match = { namespace = "^dshell-" }, blur = true, ignore_alpha = 0.3 })
-hl.layer_rule({ match = { namespace = "^dshell-notifications" }, blur = true, ignore_alpha = 0.3 })
+-- dshell layers get blur. Patterns must match the whole namespace.
+hl.layer_rule({ match = { namespace = "^dshell-.*$" }, blur = true, ignore_alpha = 0.3 })
