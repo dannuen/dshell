@@ -35,7 +35,8 @@ wl-clipboard
 grim
 slurp
 swappy
-swww
+awww
+matugen
 playerctl
 cava
 jq
