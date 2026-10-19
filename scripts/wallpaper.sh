@@ -28,10 +28,13 @@ setting() {
 run_matugen() {
     # run_matugen image <path> | run_matugen color <hex>
     command -v matugen >/dev/null 2>&1 || { echo "matugen not found, colors not updated" >&2; return 0; }
-    local mode scheme
+    local mode scheme prefer
     mode=$(setting '.theme.mode' dark)
     scheme=$(setting '.theme.scheme' scheme-tonal-spot)
-    local args=(-m "$mode" -t "$scheme")
+    # matugen 4 asks which source color to use unless --prefer is given,
+    # and fails when there is no terminal (like when the shell runs us)
+    prefer=$(setting '.theme.prefer' saturation)
+    local args=(-m "$mode" -t "$scheme" --prefer "$prefer")
     [[ -f "$MATUGEN_CFG" ]] && args+=(-c "$MATUGEN_CFG")
     if [[ $1 == image ]]; then
         matugen image "$2" "${args[@]}" >/dev/null 2>&1 || echo "matugen failed for $2" >&2
@@ -46,14 +49,19 @@ apply_wallpaper() {
     [[ -z ${WAYLAND_DISPLAY:-} ]] && return 0
     local transition
     transition=$(setting '.wallpaper.transition' fade)
-    if command -v swww >/dev/null 2>&1; then
-        pgrep -x swww-daemon >/dev/null 2>&1 || { swww-daemon >/dev/null 2>&1 & sleep 0.5; }
-        swww img "$img" --transition-type "$transition" --transition-duration 1 >/dev/null 2>&1 || true
-    elif command -v awww >/dev/null 2>&1; then
+    # awww is the current name of swww, keep swww for older installs
+    if command -v awww >/dev/null 2>&1; then
         pgrep -x awww-daemon >/dev/null 2>&1 || { awww-daemon >/dev/null 2>&1 & sleep 0.5; }
-        awww img "$img" --transition-type "$transition" >/dev/null 2>&1 || true
-    elif command -v hyprctl >/dev/null 2>&1; then
-        hyprctl hyprpaper reload ",$img" >/dev/null 2>&1 || true
+        awww img "$img" --transition-type "$transition" --transition-duration 1 >/dev/null 2>&1 \
+            || echo "awww failed to set $img" >&2
+    elif command -v swww >/dev/null 2>&1; then
+        pgrep -x swww-daemon >/dev/null 2>&1 || { swww-daemon >/dev/null 2>&1 & sleep 0.5; }
+        swww img "$img" --transition-type "$transition" --transition-duration 1 >/dev/null 2>&1 \
+            || echo "swww failed to set $img" >&2
+    elif command -v hyprpaper >/dev/null 2>&1; then
+        hyprctl hyprpaper reload ",$img" >/dev/null 2>&1 || echo "hyprpaper failed to set $img" >&2
+    else
+        echo "no wallpaper tool found, install awww" >&2
     fi
 }
 

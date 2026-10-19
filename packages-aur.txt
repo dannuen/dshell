@@ -1,6 +1,5 @@
 # AUR packages for dshell. Installed with paru or yay.
 quickshell-git
-matugen-bin
 grimblast-git
 ttf-material-symbols-variable-git
 # Vietnamese input engine. install.sh falls back to fcitx5-bamboo if this fails.

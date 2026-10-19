@@ -94,7 +94,7 @@ Pick a wallpaper with Super+W, or run:
 ~/.config/hypr/scripts/wallpaper.sh set ~/Pictures/Wallpapers/some.jpg
 ```
 
-The script sets the wallpaper (swww), runs matugen with the templates in
+The script sets the wallpaper (awww), runs matugen with the templates in
 `~/.config/dshell/templates/`, and writes colors for the shell, kitty,
 Hyprland borders and GTK. Dark or light mode is `theme.mode` in settings.json,
 or Super+Shift+D. Put wallpapers in `~/Pictures/Wallpapers` (change

@@ -5,7 +5,7 @@
 #   ./install.sh [--no-update] [--no-aur] [--copy] [--dry-run] [-h]
 #
 # --no-update  skip the full system update (pacman -Syu)
-# --no-aur     skip AUR packages (quickshell-git, matugen, fonts ...)
+# --no-aur     skip AUR packages (quickshell-git, fonts ...)
 # --copy       copy files into ~/.config instead of symlinking them
 # --dry-run    only print what would happen
 set -euo pipefail
@@ -121,7 +121,7 @@ if (( DO_AUR )); then
         fi
     done
 else
-    warn "Skipping AUR packages (--no-aur). quickshell-git and matugen are needed for the shell."
+    warn "Skipping AUR packages (--no-aur). quickshell-git is needed for the shell."
 fi
 
 # ---------------------------------------------------------------- 5. Hyprland version
