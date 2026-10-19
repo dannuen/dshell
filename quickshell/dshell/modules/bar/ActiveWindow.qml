@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import qs.config
 import qs.services
 import qs.components
@@ -10,10 +11,10 @@ Item {
     required property ShellScreen screen
     property int maxWidth: 400
 
-    readonly property var top: Hypr.activeToplevel
-    readonly property bool onThisScreen: top !== null && top.monitor?.name === screen.name
-    readonly property string appClass: top?.lastIpcObject?.class ?? ""
-    readonly property string title: onThisScreen ? (top?.title ?? "") : ""
+    readonly property var toplevel: Hypr.activeToplevel
+    readonly property bool onThisScreen: toplevel !== null && toplevel.monitor?.name === screen.name
+    readonly property string appClass: toplevel?.lastIpcObject?.class ?? ""
+    readonly property string title: onThisScreen ? (toplevel?.title ?? "") : ""
     readonly property var entry: appClass ? Apps.byId(appClass) : null
 
     implicitWidth: title ? Math.min(maxWidth, row.implicitWidth) : 0

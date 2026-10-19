@@ -92,7 +92,7 @@ Variants {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            InputMethod {
+            InputMethodWidget {
                 visible: Config.bar.showInputMethod && Fcitx.available
                 anchors.verticalCenter: parent.verticalCenter
             }

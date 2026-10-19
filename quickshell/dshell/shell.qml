@@ -2,6 +2,7 @@
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 //@ pragma IconTheme Papirus-Dark
 
+import QtQuick
 import Quickshell
 import qs.config
 import qs.services
