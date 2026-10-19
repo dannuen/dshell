@@ -102,6 +102,9 @@ bind("XF86AudioRaiseVolume", "Volume up", shell("volume", "increase"), { locked 
 bind("XF86AudioLowerVolume", "Volume down", shell("volume", "decrease"), { locked = true, repeating = true })
 bind("XF86AudioMute", "Mute", shell("volume", "mute"), { locked = true })
 bind("XF86AudioMicMute", "Mute microphone", shell("volume", "micMute"), { locked = true })
+-- horizontal scroll (tilt or thumb wheel) is a volume knob, apps no longer get it
+bind("mouse_right", "Volume up", shell("volume", "increase"), { locked = true })
+bind("mouse_left", "Volume down", shell("volume", "decrease"), { locked = true })
 bind("XF86MonBrightnessUp", "Brightness up", shell("brightness", "increase"), { locked = true, repeating = true })
 bind("XF86MonBrightnessDown", "Brightness down", shell("brightness", "decrease"), { locked = true, repeating = true })
 bind("XF86AudioPlay", "Play or pause", shell("media", "playPause"), { locked = true })
