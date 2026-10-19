@@ -41,6 +41,25 @@ run_matugen() {
     else
         matugen color hex "$2" "${args[@]}" >/dev/null 2>&1 || echo "matugen failed for color $2" >&2
     fi
+    sync_gtk "$mode"
+}
+
+sync_gtk() {
+    # Match GTK's light/dark setting to the shell and make running GTK apps
+    # pick up the new gtk.css (they only re-read it when the theme changes).
+    command -v gsettings >/dev/null 2>&1 || return 0
+    local iface=org.gnome.desktop.interface theme other
+    if [[ $1 == light ]]; then
+        gsettings set $iface color-scheme prefer-light
+        theme=adw-gtk3 other=adw-gtk3-dark
+    else
+        gsettings set $iface color-scheme prefer-dark
+        theme=adw-gtk3-dark other=adw-gtk3
+    fi
+    [[ -d /usr/share/themes/$theme || -d $HOME/.local/share/themes/$theme ]] || return 0
+    gsettings set $iface gtk-theme "$other"
+    sleep 0.2
+    gsettings set $iface gtk-theme "$theme"
 }
 
 apply_wallpaper() {
