@@ -22,7 +22,7 @@ if [[ -z $INTERNAL_NAME ]]; then
     exit 0
 fi
 
-EXTERNAL_COUNT="$(echo "$ALL_JSON" | jq --arg name "$INTERNAL_NAME" '[.[] | select(.name != $name)] | length')"
+EXTERNAL_COUNT="$(echo "$ALL_JSON" | jq --arg name "$INTERNAL_NAME" '[.[] | select(.name != $name and (.disabled | not))] | length')"
 INTERNAL_ACTIVE="$(echo "$ACTIVE_JSON" | jq --arg name "$INTERNAL_NAME" '[.[] | select(.name == $name)] | length > 0')"
 
 log "internal: $INTERNAL_NAME, external count: $EXTERNAL_COUNT, internal enabled: $INTERNAL_ACTIVE"

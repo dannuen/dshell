@@ -20,7 +20,7 @@ Singleton {
             return "battery_unknown";
         const p = Math.round(percentage * 100);
         if (charging)
-            return p >= 100 ? "battery_charging_full" : "battery_charging_full";
+            return "battery_charging_full";
         if (p >= 95)
             return "battery_full";
         if (p >= 80)

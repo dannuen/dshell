@@ -1,5 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR --export QT_IM_MODULE:fcitx
-SETUVAR --export QT_IM_MODULES:wayland\x3bfcitx
-SETUVAR --export XMODIFIERS:\x40im\x3dfcitx

@@ -111,11 +111,6 @@ do_restore() {
     if [[ -z $img || ! -f $img ]]; then
         img=$(find "$WALL_DIR" -maxdepth 2 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | sort | head -n1 || true)
     fi
-    if [[ -z $img ]]; then
-        local here
-        here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-        [[ -f "$here/../assets/default.jpg" ]] && img="$here/../assets/default.jpg"
-    fi
     if [[ -n $img && -f $img ]]; then
         do_set "$img"
     else

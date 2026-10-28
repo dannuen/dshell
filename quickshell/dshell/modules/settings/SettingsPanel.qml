@@ -19,18 +19,6 @@ PopupPanel {
 
         readonly property var sections: [
             {
-                id: "general",
-                title: "General",
-                icon: "tune",
-                fields: [
-                    { key: "terminal", label: "Terminal", type: "string" },
-                    { key: "browser", label: "Browser", type: "string" },
-                    { key: "fileManager", label: "File manager", type: "string" },
-                    { key: "editor", label: "Editor", type: "string" },
-                    { key: "laptop", label: "This is a laptop", type: "bool" }
-                ]
-            },
-            {
                 id: "appearance",
                 title: "Appearance",
                 icon: "palette",
@@ -41,8 +29,7 @@ PopupPanel {
                     { key: "rounding", label: "Corner rounding", type: "int", min: 0, max: 40 },
                     { key: "padding", label: "Padding", type: "int", min: 2, max: 24 },
                     { key: "animationSpeed", label: "Animation speed", type: "real", min: 0, max: 3, step: 0.1 },
-                    { key: "panelOpacity", label: "Panel opacity", type: "real", min: 0.3, max: 1, step: 0.05 },
-                    { key: "blur", label: "Blur behind panels", type: "bool" }
+                    { key: "panelOpacity", label: "Panel opacity", type: "real", min: 0.3, max: 1, step: 0.05 }
                 ]
             },
             {
@@ -169,7 +156,6 @@ PopupPanel {
                 icon: "terminal",
                 fields: [
                     { key: "wallpaperChanged", label: "On wallpaper changed", type: "string" },
-                    { key: "themeChanged", label: "On theme changed", type: "string" },
                     { key: "locked", label: "On lock", type: "string" },
                     { key: "unlocked", label: "On unlock", type: "string" }
                 ]

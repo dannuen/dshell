@@ -4,7 +4,6 @@ hyprland
 hypridle
 hyprpolkitagent
 hyprsunset
-hyprpicker
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-gtk
 polkit
@@ -15,7 +14,6 @@ qt6-svg
 qt6-imageformats
 qt6-shadertools
 qt6-wayland
-qt6-5compat
 # audio, network, power
 pipewire
 wireplumber
@@ -24,10 +22,8 @@ networkmanager
 bluez
 bluez-utils
 brightnessctl
-ddcutil
 power-profiles-daemon
 upower
-lm_sensors
 # shell helpers
 libqalculate
 cliphist
@@ -38,9 +34,7 @@ swappy
 awww
 matugen
 playerctl
-cava
 jq
-bc
 curl
 # apps
 kitty

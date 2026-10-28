@@ -12,7 +12,7 @@ Singleton {
     id: root
 
     readonly property bool ready: true
-    property bool dnd: Config.notifications.dnd
+    readonly property bool dnd: Config.notifications.dnd
 
     // Newest first
     property list<var> list: []
@@ -56,6 +56,13 @@ Singleton {
             n.notification.dismiss();
         list = list.filter(x => x.id !== id);
         save();
+        free(n);
+    }
+
+    // Notif objects come from createObject, so drop them by hand
+    function free(n: var): void {
+        n.timer?.destroy();
+        n.destroy();
     }
 
     function hidePopup(id: int): void {
@@ -76,8 +83,11 @@ Singleton {
         for (const n of list)
             if (n.notification)
                 n.notification.dismiss();
+        const old = list;
         list = [];
         save();
+        for (const n of old)
+            free(n);
     }
 
     function markRead(): void {
@@ -87,8 +97,7 @@ Singleton {
     }
 
     function toggleDnd(): void {
-        dnd = !dnd;
-        Config.notifications.dnd = dnd;
+        Config.notifications.dnd = !dnd;
         Config.save();
     }
 
@@ -113,7 +122,8 @@ Singleton {
             const restored = [];
             for (const d of data) {
                 const n = notifComp.createObject(root, {
-                    id: d.id,
+                    // restored ids must never clash with new ones (the server restarts at 1)
+                    id: -1 - restored.length,
                     appName: d.appName ?? "",
                     appIcon: d.appIcon ?? "",
                     summary: d.summary ?? "",
@@ -167,6 +177,7 @@ Singleton {
             notification.tracked = true;
 
             // Replace an existing one with the same id (progress updates)
+            const dropped = root.list.filter(x => x.id === notification.id);
             root.list = root.list.filter(x => x.id !== notification.id);
 
             const timeout = notification.urgency === NotificationUrgency.Critical ? Config.notifications.criticalTimeout : (notification.expireTimeout > 0 ? notification.expireTimeout : Config.notifications.timeout);
@@ -204,8 +215,11 @@ Singleton {
                 root.list = root.list.slice();
             });
 
-            root.list = [n, ...root.list].slice(0, Config.notifications.historySize);
+            const all = [n, ...root.list];
+            root.list = all.slice(0, Config.notifications.historySize);
             root.save();
+            for (const x of dropped.concat(all.slice(Config.notifications.historySize)))
+                root.free(x);
         }
     }
 }

@@ -22,8 +22,8 @@ Row {
     function apply(v: var): void {
         Config[section][field.key] = v;
         Config.save();
-        if (section === "theme" && Config.wallpaper.current !== "")
-            Wallpapers.set(Config.wallpaper.current);
+        if (section === "theme")
+            Wallpapers.rebuild();
     }
 
     StyledText {

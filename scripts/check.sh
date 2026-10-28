@@ -47,6 +47,9 @@ else
     echo "   qmllint not installed, skipped"
 fi
 
+echo ":: migrations"
+bash "$ROOT/scripts/test-migrations.sh" || fail=1
+
 echo ":: lua"
 LUAC=""
 for c in luac luac5.4 lua5.4 lua; do

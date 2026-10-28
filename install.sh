@@ -2,11 +2,10 @@
 # dshell installer for CachyOS and Arch.
 # Run as your normal user. It asks for sudo when it needs it.
 #
-#   ./install.sh [--no-update] [--no-aur] [--copy] [--dry-run] [-h]
+#   ./install.sh [--no-update] [--no-aur] [--dry-run] [-h]
 #
 # --no-update  skip the full system update (pacman -Syu)
 # --no-aur     skip AUR packages (quickshell-git, fonts ...)
-# --copy       copy files into ~/.config instead of symlinking them
 # --dry-run    only print what would happen
 set -euo pipefail
 
@@ -16,7 +15,6 @@ STATE="$HOME/.local/state/dshell"
 BACKUP="$CONFIG/dshell-backup-$(date +%Y%m%d-%H%M%S)"
 DO_UPDATE=1
 DO_AUR=1
-COPY=0
 DRY=0
 
 info() { printf '\e[1;34m::\e[0m %s\n' "$*"; }
@@ -33,7 +31,7 @@ run() {
 }
 
 usage() {
-    sed -n '2,10p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+    sed -n '2,9p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
     exit 0
 }
 
@@ -41,7 +39,6 @@ for arg in "$@"; do
     case "$arg" in
         --no-update) DO_UPDATE=0 ;;
         --no-aur) DO_AUR=0 ;;
-        --copy) COPY=1 ;;
         --dry-run) DRY=1 ;;
         -h|--help) usage ;;
         *) die "unknown option: $arg" ;;
@@ -167,7 +164,7 @@ backup() {
 
 info "Backing up old configs to $BACKUP"
 for t in "$CONFIG/hypr" "$CONFIG/quickshell/dshell" "$CONFIG/kitty" "$CONFIG/fish/config.fish" \
-         "$CONFIG/starship.toml" "$CONFIG/fcitx5" "$CONFIG/fastfetch"; do
+         "$CONFIG/starship.toml" "$CONFIG/fastfetch"; do
     backup "$t"
 done
 # settings.json is kept, but copied to the backup for safety
@@ -184,28 +181,25 @@ place() {
     # place <source in repo> <target path>
     local src="$1" dst="$2"
     run mkdir -p "$(dirname "$dst")"
-    if (( COPY )); then
-        run cp -r "$src" "$dst"
-    else
-        run ln -sfn "$src" "$dst"
-    fi
+    run ln -sfn "$src" "$dst"
 }
 
-info "Installing configs ($( (( COPY )) && echo copies || echo symlinks ))"
+info "Installing configs (symlinks)"
 # scripts are reached as ~/.config/hypr/scripts
-if (( COPY )); then
-    place "$REPO/hypr" "$CONFIG/hypr"
-    run rm -rf "$CONFIG/hypr/scripts"
-    run cp -r "$REPO/scripts" "$CONFIG/hypr/scripts"
-else
-    run ln -sfn "$REPO/scripts" "$REPO/hypr/scripts"
-    place "$REPO/hypr" "$CONFIG/hypr"
-fi
+run ln -sfn "$REPO/scripts" "$REPO/hypr/scripts"
+place "$REPO/hypr" "$CONFIG/hypr"
 place "$REPO/quickshell/dshell" "$CONFIG/quickshell/dshell"
 place "$REPO/dotfiles/kitty" "$CONFIG/kitty"
 place "$REPO/dotfiles/fish/config.fish" "$CONFIG/fish/config.fish"
 place "$REPO/dotfiles/starship/starship.toml" "$CONFIG/starship.toml"
-place "$REPO/dotfiles/fcitx5" "$CONFIG/fcitx5"
+# fcitx5 rewrites its config files, so it gets a copy, not a symlink
+# (an old install linked it into the repo and broke git pull)
+if links_into_repo "$CONFIG/fcitx5"; then
+    run rm -f "$CONFIG/fcitx5"
+fi
+if [[ ! -e "$CONFIG/fcitx5" ]]; then
+    run cp -r "$REPO/dotfiles/fcitx5" "$CONFIG/fcitx5"
+fi
 place "$REPO/dotfiles/fastfetch" "$CONFIG/fastfetch"
 
 run mkdir -p "$CONFIG/dshell/templates" "$STATE" "$HOME/Pictures/Wallpapers" "$HOME/Pictures/Screenshots" \

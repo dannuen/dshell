@@ -22,12 +22,12 @@ bash install.sh
 Then log out, pick Hyprland in SDDM, and log in.
 
 The installer backs up `~/.config/hypr`, `~/.config/quickshell/dshell`,
-`~/.config/kitty`, `~/.config/fish/config.fish`, `~/.config/starship.toml`,
-`~/.config/fcitx5` and `~/.config/fastfetch` into
-`~/.config/dshell-backup-<date>/` before it links the new files.
+`~/.config/kitty`, `~/.config/fish/config.fish`, `~/.config/starship.toml`
+and `~/.config/fastfetch` into `~/.config/dshell-backup-<date>/` before it
+links the new files. `~/.config/fcitx5` is copied only when it does not exist
+yet (fcitx5 rewrites its files, so it is not a symlink).
 
-Flags: `--no-update` (skip pacman -Syu), `--no-aur`, `--copy` (copy instead of
-symlink), `--dry-run`.
+Flags: `--no-update` (skip pacman -Syu), `--no-aur`, `--dry-run`.
 
 ## Layout
 
