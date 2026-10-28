@@ -13,7 +13,7 @@ Singleton {
     readonly property bool ready: true
     property list<string> list: []
     readonly property string current: Config.wallpaper.current
-    readonly property string scriptDir: Quickshell.shellDir + "/../../scripts"
+    readonly property string scriptDir: Quickshell.env("HOME") + "/.config/hypr/scripts"
     property bool busy: false
 
     function refresh(): void {
@@ -21,10 +21,25 @@ Singleton {
     }
 
     function set(path: string): void {
-        if (!path || busy)
+        if (!path)
+            return;
+        runScript(["set", path]);
+    }
+
+    // Re-run the theme pipeline for the current wallpaper (or a plain
+    // color scheme when there is none), used after a theme change.
+    function rebuild(): void {
+        if (current)
+            set(current);
+        else
+            runScript(["restore"]);
+    }
+
+    function runScript(args: list<string>): void {
+        if (busy)
             return;
         busy = true;
-        setProc.command = [`${scriptDir}/wallpaper.sh`, "set", path];
+        setProc.command = [`${scriptDir}/wallpaper.sh`, ...args];
         setProc.running = true;
     }
 
@@ -37,8 +52,7 @@ Singleton {
     function setMode(mode: string): void {
         Config.theme.mode = mode;
         Config.save();
-        if (current)
-            set(current);
+        rebuild();
     }
 
     function toggleMode(): void {
@@ -47,10 +61,10 @@ Singleton {
 
     Process {
         id: listProc
-        command: ["sh", "-c", `find "${Config.wallpaper.dir}" -maxdepth 2 -type f \\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \\) 2>/dev/null | sort`]
+        command: ["find", Config.wallpaper.dir, "-maxdepth", "2", "-type", "f", "(", "-iname", "*.jpg", "-o", "-iname", "*.jpeg", "-o", "-iname", "*.png", "-o", "-iname", "*.webp", ")"]
         running: true
         stdout: StdioCollector {
-            onStreamFinished: root.list = text.trim().split("\n").filter(l => l.length > 0)
+            onStreamFinished: root.list = text.trim().split("\n").filter(l => l.length > 0).sort()
         }
     }
 

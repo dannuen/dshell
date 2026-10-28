@@ -48,7 +48,7 @@ Singleton {
 
     Process {
         id: proc
-        command: ["sh", "-c", `curl -sf --max-time 15 "https://wttr.in/${encodeURIComponent(Config.weather.location)}?format=j1"`]
+        command: ["curl", "-sf", "--max-time", "15", `https://wttr.in/${encodeURIComponent(Config.weather.location)}?format=j1`]
         stdout: StdioCollector {
             onStreamFinished: {
                 try {

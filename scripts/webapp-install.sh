@@ -19,107 +19,19 @@ find_brave_bin() {
   return 1
 }
 
-# Install Brave Origin using whatever mechanism fits this system, then confirm
-# it actually landed on PATH. Prefers native distro packages (kept up to date
-# by the system package manager); falls back to the official portable .zip
-# release under ~/.local/opt for anything else, which needs no root.
+# Install Brave Origin from the AUR (pacman + yay/paru only).
 install_brave_origin() {
-  echo "Brave Origin not found — installing it as a dependency..." >&2
-
-  if [[ $EUID -ne 0 ]] && command -v sudo &>/dev/null; then
-    SUDO="sudo"
-  elif [[ $EUID -eq 0 ]]; then
-    SUDO=""
-  else
-    SUDO="" # no root and no sudo; native package managers below will just fail and we'll fall through to the zip release
-  fi
-
+  echo "Brave Origin not found, installing brave-origin-bin from the AUR..." >&2
   if command -v pacman &>/dev/null; then
-    # Arch based: install from the AUR via whatever helper is present.
     for helper in yay paru; do
       if command -v "$helper" &>/dev/null; then
         "$helper" -S --noconfirm --needed brave-origin-bin && return 0
         break
       fi
     done
-    echo "No AUR helper (yay/paru) found — falling back to portable install." >&2
-
-  elif command -v apt &>/dev/null || command -v apt-get &>/dev/null; then
-    local apt_bin=apt
-    command -v apt &>/dev/null || apt_bin=apt-get
-    $SUDO curl -fsSL -o /usr/share/keyrings/brave-browser-archive-keyring.gpg \
-      https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg &&
-      $SUDO curl -fsSL -o /etc/apt/sources.list.d/brave-browser-release.sources \
-        https://brave-browser-apt-release.s3.brave.com/brave-browser.sources &&
-      $SUDO "$apt_bin" update &&
-      $SUDO "$apt_bin" install -y brave-origin && return 0
-    echo "apt-based install failed — falling back to portable install." >&2
-
-  elif command -v dnf &>/dev/null; then
-    $SUDO dnf install -y dnf-plugins-core &&
-      $SUDO dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo &&
-      $SUDO dnf install -y brave-origin && return 0
-    echo "dnf-based install failed — falling back to portable install." >&2
   fi
-
-  # Universal fallback: official portable .zip release, no root required.
-  # (Brave doesn't publish an AppImage, unlike Helium — the zip is the
-  # closest no-install-required equivalent and is an official artifact.)
-  echo "Installing Brave Origin as a portable build in ~/.local/opt..." >&2
-  local opt_dir="$HOME/.local/opt/brave-origin"
-  local bin_dir="$HOME/.local/bin"
-  mkdir -p "$opt_dir" "$bin_dir"
-
-  local arch zip_url
-  case "$(uname -m)" in
-  x86_64) arch="amd64" ;;
-  aarch64 | arm64) arch="arm64" ;;
-  *)
-    echo "Error: no portable build available for architecture $(uname -m)." >&2
-    return 1
-    ;;
-  esac
-
-  zip_url=$(curl -fsSL --max-time 15 https://api.github.com/repos/brave/brave-browser/releases/latest 2>/dev/null |
-    grep -oE "\"browser_download_url\": *\"[^\"]*brave-origin[^\"]*${arch}\.zip\"" |
-    head -1 | sed -E 's/.*"(https[^"]+)"/\1/')
-
-  if [[ -z $zip_url ]]; then
-    echo "Error: could not resolve the latest Brave Origin .zip download URL." >&2
-    return 1
-  fi
-
-  local tmp_zip
-  tmp_zip=$(mktemp --suffix=.zip)
-  if ! curl -fsSL --max-time 180 -o "$tmp_zip" "$zip_url"; then
-    echo "Error: failed to download Brave Origin .zip release." >&2
-    rm -f "$tmp_zip"
-    return 1
-  fi
-
-  if ! command -v unzip &>/dev/null; then
-    echo "Error: 'unzip' is required to install the portable Brave Origin build." >&2
-    rm -f "$tmp_zip"
-    return 1
-  fi
-
-  rm -rf "${opt_dir:?}"/*
-  unzip -q "$tmp_zip" -d "$opt_dir"
-  rm -f "$tmp_zip"
-
-  local brave_exe
-  brave_exe=$(find "$opt_dir" -maxdepth 2 -type f -iname 'brave*' -perm -u+x | head -1)
-  if [[ -z $brave_exe ]]; then
-    echo "Error: could not locate the Brave Origin executable after extraction." >&2
-    return 1
-  fi
-
-  ln -sf "$brave_exe" "$bin_dir/brave-origin"
-
-  case ":$PATH:" in
-  *":$bin_dir:"*) ;;
-  *) echo "Note: add $bin_dir to your PATH to run 'brave-origin' directly." >&2 ;;
-  esac
+  echo "Error: could not install Brave Origin (needs pacman and yay or paru)." >&2
+  return 1
 }
 
 safe_icon_name() {
@@ -183,14 +95,8 @@ fetch_site_icon() {
 # Locate Brave Origin up front, installing it automatically if it's missing.
 if ! BRAVE_BIN=$(find_brave_bin); then
   if install_brave_origin; then
-    # ~/.local/bin may not be on PATH yet in this shell; check it explicitly
-    # before giving up, since install_brave_origin may have just placed it there.
-    if ! BRAVE_BIN=$(find_brave_bin); then
-      hash -r
-      if [[ -x "$HOME/.local/bin/brave-origin" ]]; then
-        BRAVE_BIN="$HOME/.local/bin/brave-origin"
-      fi
-    fi
+    hash -r
+    BRAVE_BIN=$(find_brave_bin) || true
   fi
 
   if [[ -z ${BRAVE_BIN:-} ]]; then

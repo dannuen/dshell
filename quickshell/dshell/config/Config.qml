@@ -14,7 +14,6 @@ Singleton {
     readonly property string stateDir: `${home}/.local/state/dshell`
     readonly property string settingsPath: `${configDir}/settings.json`
 
-    property alias general: adapter.general
     property alias appearance: adapter.appearance
     property alias theme: adapter.theme
     property alias bar: adapter.bar
@@ -38,19 +37,13 @@ Singleton {
         path: root.settingsPath
         watchChanges: true
         printErrors: false
+        // finish writing settings.json before wallpaper.sh reads it
+        blockWrites: true
         onFileChanged: reload()
         onAdapterUpdated: writeAdapter()
 
         JsonAdapter {
             id: adapter
-
-            property JsonObject general: JsonObject {
-                property string terminal: "kitty"
-                property string browser: "brave"
-                property string fileManager: "nautilus"
-                property string editor: "obsidian"
-                property bool laptop: true
-            }
 
             property JsonObject appearance: JsonObject {
                 property string font: "CaskaydiaCove Nerd Font"
@@ -60,7 +53,6 @@ Singleton {
                 property int padding: 8
                 property real animationSpeed: 1.0
                 property real panelOpacity: 0.92
-                property bool blur: true
             }
 
             property JsonObject theme: JsonObject {
@@ -146,7 +138,6 @@ Singleton {
 
             property JsonObject hooks: JsonObject {
                 property string wallpaperChanged: ""
-                property string themeChanged: ""
                 property string locked: ""
                 property string unlocked: ""
             }

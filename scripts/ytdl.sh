@@ -28,87 +28,9 @@ ok()    { echo -e "${GREEN}${1}${NC}"; }
 warn()  { echo -e "${YELLOW}${1}${NC}"; }
 err()   { echo -e "${RED}${1}${NC}" >&2; }
 
-detect_pkg_manager() {
-    if command -v apt-get &>/dev/null; then echo "apt"; return; fi
-    if command -v dnf &>/dev/null; then echo "dnf"; return; fi
-    if command -v yum &>/dev/null; then echo "yum"; return; fi
-    if command -v pacman &>/dev/null; then echo "pacman"; return; fi
-    if command -v brew &>/dev/null; then echo "brew"; return; fi
-    if command -v zypper &>/dev/null; then echo "zypper"; return; fi
-    echo "none"
-}
-
-install_ffmpeg() {
-    local pm; pm=$(detect_pkg_manager)
-    info "Installing ffmpeg via ${pm}..."
-    case "$pm" in
-        apt)
-            sudo apt-get update -qq && sudo apt-get install -y ffmpeg
-            ;;
-        dnf)
-            sudo dnf install -y ffmpeg
-            ;;
-        yum)
-            sudo yum install -y ffmpeg
-            ;;
-        pacman)
-            sudo pacman -Sy --noconfirm ffmpeg
-            ;;
-        zypper)
-            sudo zypper install -y ffmpeg
-            ;;
-        brew)
-            brew install ffmpeg
-            ;;
-        none)
-            err "No supported package manager found. Please install ffmpeg manually: https://ffmpeg.org/download.html"
-            return 1
-            ;;
-    esac
-}
-
-install_yt_dlp() {
-    info "Installing yt-dlp..."
-    if command -v pip3 &>/dev/null; then
-        pip3 install --user --upgrade yt-dlp
-    elif command -v pip &>/dev/null; then
-        pip install --user --upgrade yt-dlp
-    else
-        local pm; pm=$(detect_pkg_manager)
-        case "$pm" in
-            apt) sudo apt-get update -qq && sudo apt-get install -y python3-pip && pip3 install --user --upgrade yt-dlp ;;
-            brew) brew install yt-dlp ;;
-            *)
-                err "No pip found and no supported fallback. Please install yt-dlp manually: https://github.com/yt-dlp/yt-dlp#installation"
-                return 1
-                ;;
-        esac
-    fi
-}
-
 check_dependencies() {
-    local need_path_refresh=false
-
-    if ! command -v yt-dlp &>/dev/null; then
-        warn "yt-dlp not found. Installing automatically..."
-        install_yt_dlp || { err "Failed to install yt-dlp. Exiting."; exit 1; }
-        need_path_refresh=true
-    fi
-
-    if ! command -v ffmpeg &>/dev/null; then
-        warn "ffmpeg not found. Installing automatically..."
-        install_ffmpeg || warn "Continuing without ffmpeg — merging/conversion may fail."
-        need_path_refresh=true
-    fi
-
-    if [[ "$need_path_refresh" == true ]]; then
-        # Make sure a freshly pip --user installed yt-dlp is on PATH
-        export PATH="$HOME/.local/bin:$PATH"
-        hash -r 2>/dev/null || true
-    fi
-
-    if ! command -v yt-dlp &>/dev/null; then
-        err "yt-dlp still not found on PATH after install. Try opening a new terminal or add ~/.local/bin to your PATH."
+    if ! command -v yt-dlp &>/dev/null || ! command -v ffmpeg &>/dev/null; then
+        err "yt-dlp or ffmpeg not found. Install them with: sudo pacman -S --needed ffmpeg yt-dlp (or run install.sh)"
         exit 1
     fi
 
